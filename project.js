@@ -75,8 +75,18 @@ const spin = () => {
 
     // create reels
     const reels = [];
+    for (let i = 0; i < COLS; i++) {
+        reels.push([]);
+        for (let j = 0; j < ROWS; j++) {
+            let newsymbols = [...symbols];
+            let newindex = Math.floor(Math.random() * newsymbols.length);
+            reels.push(newsymbols[newindex]);
+            newsymbols.slice(newindex, 1);
+            console.log(reels)
 
-    
+        };
+    }
+    console.log(reels)
 };
 
 
