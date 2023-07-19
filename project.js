@@ -96,8 +96,15 @@ const transpose = (reels) => {
             rows[i].push(newsymbol);
         }
     }
+    return rows;
 
 };
+
+const printRows = (rows) => {
+    console.log(rows.join(" | "));
+    
+
+}
 
 
 let balance = deposit();
@@ -107,4 +114,5 @@ const reels = spin();
 const rows = transpose(reels);
 console.log(reels);
 console.log(rows);
+printRows(rows);
 
