@@ -77,20 +77,34 @@ const spin = () => {
     const reels = [];
     for (let i = 0; i < COLS; i++) {
         reels.push([]);
+        const newsymbols = [...symbols];
         for (let j = 0; j < ROWS; j++) {
-            let newsymbols = [...symbols];
-            let newindex = Math.floor(Math.random() * newsymbols.length);
-            reels.push(newsymbols[newindex]);
-            newsymbols.slice(newindex, 1);
-            console.log(reels)
-
-        };
+            const newindex = Math.floor(Math.random() * newsymbols.length);
+            reels[i].push(newsymbols[newindex]);
+            newsymbols.splice(newindex, 1);
+        }
     }
-    console.log(reels)
+    return reels;
+};
+
+const transpose = (reels) => {
+    const rows = []
+    for (let i = 0; i < ROWS; i++) {
+        rows.push([]);
+        for (let j = 0; j < COLS; j++) {
+            const newsymbol = reels[j][i];
+            rows[i].push(newsymbol);
+        }
+    }
+
 };
 
 
-spin();
 let balance = deposit();
 const totalLines = numberOfLines();
 const amountBet = numberOfBet(balance, totalLines);
+const reels = spin();
+const rows = transpose(reels);
+console.log(reels);
+console.log(rows);
+
