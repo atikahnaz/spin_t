@@ -101,10 +101,18 @@ const transpose = (reels) => {
 };
 
 const printRows = (rows) => {
-    console.log(rows.join(" | "));
+    for (const row of rows) {
+        let newRows = "";
+        for (const [index, value] of row.entries()) {
+            newRows += value;
+            if (index != (row.length - 1)) {
+                newRows += " | ";
+            }
+        }
+        console.log(newRows);
+    }
     
-
-}
+};
 
 
 let balance = deposit();
