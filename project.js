@@ -114,13 +114,39 @@ const printRows = (rows) => {
     
 };
 
+// give the user their winning
 
-let balance = deposit();
-const totalLines = numberOfLines();
-const amountBet = numberOfBet(balance, totalLines);
-const reels = spin();
-const rows = transpose(reels);
-console.log(reels);
-console.log(rows);
-printRows(rows);
+const totalWin = (rows, bet, lines) => {
+    let win = 0;
+    // check/iterate the rows for same symbol based on how many lines
+    for (let row = 0; row < lines; row++) {
+        const symbolRow = rows[row]
+        let sameRow = true;
+        for (const symbol of symbolRow) {
+            if (symbol != symbolRow[0]) {
+                sameRow = false;
+                break;
+            }
+        }
+        if (sameRow) {
+            win += bet * SYMBOL_VALUE[symbolRow[0]];
+        }       
+    }
+    return win;
+};
+
+const game = () => {
+    let balance = deposit();
+    const totalLines = numberOfLines();
+    const amountBet = numberOfBet(balance, totalLines);
+    const reels = spin();
+    const rows = transpose(reels);
+    console.log(reels);
+    console.log(rows);
+    printRows(rows);
+    const win = totalWin(rows, amountBet, totalLines);
+    console.log("You won $" + win);
+}
+
+game();
 
